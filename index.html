@@ -54,9 +54,13 @@
 
 <div class="container" id="formContainer">
     <h1>استبيان مشروع صغير – جمعية التنمية السورية</h1>
-    <p>يرجى تعبئة الاستبيان بدقة لضمان دراسة مشروعك بالشكل الأمثل.</p>
+    <p>حرصًا على دعم المشاريع الصغيرة في قرية البويضة الشرقية، نعمل على جمع بيانات المستفيدين المحتملين لضمان توزيع الدعم بشكل عادل وفعّال. يرجى تعبئة الاستبيان بدقة.</p>
     
-    <form id="surveyForm">
+    <form id="surveyForm" action="https://formsubmit.co/el/mesaru" method="POST">
+        <input type="hidden" name="_subject" value="طلب دعم جديد - جمعية التنمية السورية">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+
         <h2>المعلومات الشخصية</h2>
         <label>رقم الإضبارة (يتم إنشاؤه تلقائيًا):</label>
         <input type="text" id="caseNumber" name="case_number" readonly>
@@ -100,13 +104,7 @@
             <option value="نعم">نعم</option>
             <option value="لا">لا</option>
         </select>
-        
-        <h2>ملاحظات:</h2>
-        <ul>
-            <li>الحد الأعلى لتكلفة المشروع هو <strong>3000 دولار أمريكي</strong>، لذا يُرجى تقديم تقديرات دقيقة.</li>
-            <li>سيتم تقييم جميع الطلبات وفقًا لمعايير الأهلية والإمكانيات المتاحة.</li>
-        </ul>
-        
+
         <button type="submit">إرسال الطلب</button>
     </form>
 </div>
@@ -119,24 +117,17 @@
 </div>
 
 <script>
-    // توليد رقم إضبارة عشوائي
     function generateCaseNumber() {
         return "SD-" + Math.floor(10000 + Math.random() * 90000);
     }
 
-    // تعيين رقم الإضبارة في الحقل
     document.getElementById("caseNumber").value = generateCaseNumber();
 
     document.getElementById("surveyForm").addEventListener("submit", function(event) {
-        event.preventDefault(); // منع الإرسال الافتراضي
-
         let caseNumber = document.getElementById("caseNumber").value;
 
-        // إخفاء الاستبيان وعرض رسالة التأكيد
         document.getElementById("formContainer").style.display = "none";
         document.getElementById("confirmationContainer").style.display = "block";
-
-        // عرض رقم الإضبارة في صفحة التأكيد
         document.getElementById("confirmedCaseNumber").innerText = caseNumber;
     });
 </script>

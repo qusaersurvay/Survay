@@ -4,36 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>استبيان جمعية التنمية الاجتماعية</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            direction: rtl;
+            text-align: right;
+        }
+        h2 {
+            color: #3e8e41;
+        }
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-size: 16px;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+        }
+        input[type="text"], input[type="email"], input[type="number"], input[type="date"], textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #3e8e41;
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 100%;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
 
     <h2>حرصًا على دعم المشاريع الصغيرة في قرية البويضة الشرقية</h2>
     <p>نحن نعمل على جمع بيانات المستفيدين المحتملين لضمان توزيع الدعم بشكل عادل وفعّال. يرجى تعبئة الاستبيان بدقة.</p>
 
-    <form action="mailto:juansanchez7985@gmail.com" method="POST" enctype="multipart/form-data">
-        <label for="name">الاسم الكامل:</label><br>
-        <input type="text" id="name" name="name" required><br><br>
+    <form action="mailto:juansanchez7985@gmail.com?subject=استبيان جمعية التنمية الاجتماعية&body=" method="POST" enctype="multipart/form-data">
+        <label for="case_number">رقم الضبارة:</label>
+        <input type="text" id="case_number" name="case_number" required>
 
-        <label for="email">البريد الإلكتروني:</label><br>
-        <input type="email" id="email" name="email" required><br><br>
+        <label for="name">الاسم الكامل:</label>
+        <input type="text" id="name" name="name" required>
 
-        <label for="project_name">اسم المشروع:</label><br>
-        <input type="text" id="project_name" name="project_name" required><br><br>
+        <label for="email">البريد الإلكتروني:</label>
+        <input type="email" id="email" name="email" required>
 
-        <label for="tools_needed">ما هي الأدوات اللازمة للمشروع؟</label><br>
-        <textarea id="tools_needed" name="tools_needed" required></textarea><br><br>
+        <label for="project_name">اسم المشروع:</label>
+        <input type="text" id="project_name" name="project_name" required>
 
-        <label for="experience">عدد سنوات الخبرة:</label><br>
-        <input type="number" id="experience" name="experience" required><br><br>
+        <label for="tools_needed">ما هي الأدوات اللازمة للمشروع؟</label>
+        <textarea id="tools_needed" name="tools_needed" required></textarea>
 
-        <label for="dob">تاريخ الميلاد:</label><br>
-        <input type="date" id="dob" name="dob" required><br><br>
+        <label for="experience">عدد سنوات الخبرة:</label>
+        <input type="number" id="experience" name="experience" required>
 
-        <label for="project_cost">تكلفة المشروع (حد أقصى 3000 دولار):</label><br>
-        <input type="number" id="project_cost" name="project_cost" max="3000" required><br><br>
+        <label for="dob">تاريخ الميلاد:</label>
+        <input type="date" id="dob" name="dob" required>
 
-        <label for="beneficiary_name">اسم المستفيد:</label><br>
-        <input type="text" id="beneficiary_name" name="beneficiary_name" required><br><br>
+        <label for="project_cost">تكلفة المشروع (حد أقصى 3000 دولار):</label>
+        <input type="number" id="project_cost" name="project_cost" max="3000" required>
+
+        <label for="beneficiary_name">اسم المستفيد:</label>
+        <input type="text" id="beneficiary_name" name="beneficiary_name" required>
 
         <input type="submit" value="إرسال">
     </form>

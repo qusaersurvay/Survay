@@ -3,140 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>استبيان مشروع صغير – جمعية التنمية السورية</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            direction: rtl;
-            text-align: right;
-            margin: 20px;
-            background-color: #f4f4f4;
-        }
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            margin: auto;
-        }
-        h1, h2 {
-            color: #333;
-        }
-        input, select, textarea {
-            width: 100%;
-            padding: 8px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            background: #28a745;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background: #218838;
-        }
-        .confirmation {
-            display: none;
-            text-align: center;
-        }
-        .confirmation h1 {
-            color: #28a745;
-        }
-    </style>
+    <title>استبيان جمعية التنمية الاجتماعية</title>
 </head>
 <body>
 
-<div class="container" id="formContainer">
-    <h1>استبيان مشروع صغير – جمعية التنمية السورية</h1>
-    <p>حرصًا على دعم المشاريع الصغيرة في قرية البويضة الشرقية، نعمل على جمع بيانات المستفيدين المحتملين لضمان توزيع الدعم بشكل عادل وفعّال. يرجى تعبئة الاستبيان بدقة.</p>
-    
-    <form id="surveyForm" action="https://formsubmit.co/el/mesaru" method="POST">
-        <!-- إخفاء الكابتشا -->
-        <input type="hidden" name="_captcha" value="false">
+    <h2>حرصًا على دعم المشاريع الصغيرة في قرية البويضة الشرقية</h2>
+    <p>نحن نعمل على جمع بيانات المستفيدين المحتملين لضمان توزيع الدعم بشكل عادل وفعّال. يرجى تعبئة الاستبيان بدقة.</p>
 
-        <!-- موضوع الرسالة في البريد الإلكتروني -->
-        <input type="hidden" name="_subject" value="طلب دعم جديد - جمعية التنمية السورية">
+    <form action="https://formsubmit.co/el/mesaru?next=https://qusaersurvay.github.io/Survay/thanks.html" method="POST">
+        <label for="name">الاسم الكامل:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
 
-        <!-- قالب البريد الإلكتروني -->
-        <input type="hidden" name="_template" value="table">
+        <label for="email">البريد الإلكتروني:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
 
-        <!-- رقم الإضبارة يتم توليده تلقائيًا -->
-        <label>رقم الإضبارة (يتم إنشاؤه تلقائيًا):</label>
-        <input type="text" id="caseNumber" name="case_number" readonly>
+        <label for="project_name">اسم المشروع:</label><br>
+        <input type="text" id="project_name" name="project_name" required><br><br>
 
-        <h2>المعلومات الشخصية</h2>
-        <label>الاسم الكامل:</label>
-        <input type="text" name="fullname" required>
-        
-        <label>تاريخ الميلاد:</label>
-        <input type="date" name="birthdate" required>
-        
-        <label>مكان الإقامة:</label>
-        <input type="text" name="location" required>
-        
-        <label>رقم الهاتف:</label>
-        <input type="tel" name="phone" required>
+        <label for="tools_needed">ما هي الأدوات اللازمة للمشروع؟</label><br>
+        <textarea id="tools_needed" name="tools_needed" required></textarea><br><br>
 
-        <h2>تفاصيل المشروع</h2>
-        <label>اسم المشروع الصغير:</label>
-        <input type="text" name="project_name" required>
-        
-        <label>نوع النشاط:</label>
-        <input type="text" name="project_type" required>
+        <label for="experience">عدد سنوات الخبرة:</label><br>
+        <input type="number" id="experience" name="experience" required><br><br>
 
-        <label>عدد سنوات الخبرة:</label>
-        <input type="number" name="experience_years" required>
-        
-        <label>التكلفة التقديرية (بحد أقصى 3000 دولار):</label>
-        <input type="number" name="estimated_cost" max="3000" required>
+        <label for="dob">تاريخ الميلاد:</label><br>
+        <input type="date" id="dob" name="dob" required><br><br>
 
-        <label>ما هي الأدوات اللازمة للمشروع؟</label>
-        <textarea name="required_tools" rows="3" required></textarea>
+        <label for="project_cost">تكلفة المشروع (حد أقصى 3000 دولار):</label><br>
+        <input type="number" id="project_cost" name="project_cost" max="3000" required><br><br>
 
-        <label>هل لديك مصدر دخل آخر؟</label>
-        <select name="other_income" required>
-            <option value="نعم">نعم</option>
-            <option value="لا">لا</option>
-        </select>
+        <label for="beneficiary_name">اسم المستفيد:</label><br>
+        <input type="text" id="beneficiary_name" name="beneficiary_name" required><br><br>
 
-        <label>هل حصلت على دعم سابق؟</label>
-        <select name="previous_support" required>
-            <option value="نعم">نعم</option>
-            <option value="لا">لا</option>
-        </select>
-
-        <button type="submit">إرسال الطلب</button>
+        <input type="submit" value="إرسال">
     </form>
-</div>
-
-<!-- رسالة التأكيد -->
-<div class="container confirmation" id="confirmationContainer">
-    <h1>تم استقبال طلبك بنجاح!</h1>
-    <p>رقم إضبارتك هو: <strong id="confirmedCaseNumber"></strong></p>
-    <p>يرجى حفظ هذا الرقم لمراجعتنا عند الحاجة.</p>
-</div>
-
-<script>
-    function generateCaseNumber() {
-        return "SD-" + Math.floor(10000 + Math.random() * 90000);
-    }
-
-    document.getElementById("caseNumber").value = generateCaseNumber();
-
-    document.getElementById("surveyForm").addEventListener("submit", function(event) {
-        let caseNumber = document.getElementById("caseNumber").value;
-
-        document.getElementById("formContainer").style.display = "none";
-        document.getElementById("confirmationContainer").style.display = "block";
-        document.getElementById("confirmedCaseNumber").innerText = caseNumber;
-    });
-</script>
 
 </body>
 </html>

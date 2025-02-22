@@ -41,17 +41,26 @@
         button:hover {
             background: #218838;
         }
+        .confirmation {
+            display: none;
+            text-align: center;
+        }
+        .confirmation h1 {
+            color: #28a745;
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
+<div class="container" id="formContainer">
     <h1>استبيان مشروع صغير – جمعية التنمية السورية</h1>
-    <p>حرصًا على دعم المشاريع الصغيرة في قرية <strong>البويضة الشرقية</strong>، نعمل على جمع بيانات المستفيدين المحتملين لضمان توزيع الدعم بشكل عادل وفعّال. يرجى تعبئة الاستبيان بدقة.</p>
+    <p>يرجى تعبئة الاستبيان بدقة لضمان دراسة مشروعك بالشكل الأمثل.</p>
     
-    <form action="https://formspree.io/f/{your_form_id}" method="POST">
-        
+    <form id="surveyForm">
         <h2>المعلومات الشخصية</h2>
+        <label>رقم الإضبارة (يتم إنشاؤه تلقائيًا):</label>
+        <input type="text" id="caseNumber" name="case_number" readonly>
+
         <label>الاسم الكامل:</label>
         <input type="text" name="fullname" required>
         
@@ -63,67 +72,74 @@
         
         <label>رقم الهاتف:</label>
         <input type="tel" name="phone" required>
-        
-        <label>عدد أفراد الأسرة:</label>
-        <input type="number" name="family_members" required>
-        
-        <label>هل لديك أي مصدر دخل حالي؟</label>
-        <select name="income_source">
-            <option value="لا">لا</option>
-            <option value="نعم">نعم</option>
-        </select>
-        
+
         <h2>تفاصيل المشروع</h2>
         <label>اسم المشروع الصغير:</label>
         <input type="text" name="project_name" required>
         
         <label>نوع النشاط:</label>
         <input type="text" name="project_type" required>
-        
+
         <label>عدد سنوات الخبرة:</label>
         <input type="number" name="experience_years" required>
         
-        <label>هل تمتلك جزءًا من المعدات؟</label>
-        <select name="own_equipment">
-            <option value="أمتلك بعض المعدات">أمتلك بعض المعدات</option>
-            <option value="أحتاج إلى تمويل كامل">أحتاج إلى تمويل كامل</option>
-        </select>
-        
-        <label>المعدات المطلوبة:</label>
-        <textarea name="required_equipment" required></textarea>
-        
         <label>التكلفة التقديرية (بحد أقصى 3000 دولار):</label>
         <input type="number" name="estimated_cost" max="3000" required>
-        
-        <label>هل لديك مكان مناسب لتنفيذ المشروع؟</label>
-        <select name="project_location">
+
+        <label>ما هي الأدوات اللازمة للمشروع؟</label>
+        <textarea name="required_tools" rows="3" required></textarea>
+
+        <label>هل لديك مصدر دخل آخر؟</label>
+        <select name="other_income" required>
+            <option value="نعم">نعم</option>
+            <option value="لا">لا</option>
+        </select>
+
+        <label>هل حصلت على دعم سابق؟</label>
+        <select name="previous_support" required>
             <option value="نعم">نعم</option>
             <option value="لا">لا</option>
         </select>
         
-        <h2>إدارة المشروع</h2>
-        <label>هل لديك خطة تطوير للمشروع؟</label>
-        <textarea name="development_plan"></textarea>
-        
-        <label>هل يمكنك تشغيل أفراد آخرين؟ كم شخصًا؟</label>
-        <input type="number" name="potential_employees">
-        
-        <label>ما هي طرق التسويق التي تخطط لاستخدامها؟</label>
-        <textarea name="marketing_methods"></textarea>
-        
-        <label>ما هي الصعوبات التي قد تواجهك؟</label>
-        <textarea name="challenges"></textarea>
-        
-        <h2>ملاحظات هامة:</h2>
+        <h2>ملاحظات:</h2>
         <ul>
             <li>الحد الأعلى لتكلفة المشروع هو <strong>3000 دولار أمريكي</strong>، لذا يُرجى تقديم تقديرات دقيقة.</li>
             <li>سيتم تقييم جميع الطلبات وفقًا لمعايير الأهلية والإمكانيات المتاحة.</li>
-            <li>تعبئة هذا الاستبيان لا تعني الحصول على التمويل مباشرة، بل هو جزء من عملية التقييم.</li>
         </ul>
         
         <button type="submit">إرسال الطلب</button>
     </form>
 </div>
+
+<!-- رسالة التأكيد -->
+<div class="container confirmation" id="confirmationContainer">
+    <h1>تم استقبال طلبك بنجاح!</h1>
+    <p>رقم إضبارتك هو: <strong id="confirmedCaseNumber"></strong></p>
+    <p>يرجى حفظ هذا الرقم لمراجعتنا عند الحاجة.</p>
+</div>
+
+<script>
+    // توليد رقم إضبارة عشوائي
+    function generateCaseNumber() {
+        return "SD-" + Math.floor(10000 + Math.random() * 90000);
+    }
+
+    // تعيين رقم الإضبارة في الحقل
+    document.getElementById("caseNumber").value = generateCaseNumber();
+
+    document.getElementById("surveyForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // منع الإرسال الافتراضي
+
+        let caseNumber = document.getElementById("caseNumber").value;
+
+        // إخفاء الاستبيان وعرض رسالة التأكيد
+        document.getElementById("formContainer").style.display = "none";
+        document.getElementById("confirmationContainer").style.display = "block";
+
+        // عرض رقم الإضبارة في صفحة التأكيد
+        document.getElementById("confirmedCaseNumber").innerText = caseNumber;
+    });
+</script>
 
 </body>
 </html>
